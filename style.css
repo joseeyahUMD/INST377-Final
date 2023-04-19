@@ -1,0 +1,43 @@
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the main content */
+.container {
+    margin: 0 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    flex:1;
+}
+
+/* Left box */
+.left-box {
+    flex: 0 1 auto;
+    margin: 1rem;
+    padding: 1.5rem;
+}
+
+/* Right box */
+.right-box {
+    flex: 1 2 auto;
+    margin: 1rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Link styles */
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+
+/*.map-container {
+     Add any styles for your Leaflet map container here 
+}
+*/
