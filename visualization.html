@@ -1,20 +1,29 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Accident Prevention in Prince George's County</title>
-    <title>Visualization High-Accident Areas</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <!-- Include any necessary libraries or stylesheets for Leaflet here -->
+    <meta charset="UTF-8">
+    <title>Accident Data Visualization</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Visualization High-Accident Areas</h1>
+    <header class="header">
+        <h1>Accident Data Visualization</h1>
     </header>
-    <div class="map-container">
-        <!-- Add your Leaflet map visualization here -->
+    
+    <div class = "box">
+        <div class="container">
+            <div id="mapContainer">
+                <h3 class="header">Visualization</h3>
+                <div id="map"></div>
+            </div>
+        </div>
     </div>
+  
+       
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
