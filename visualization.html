@@ -13,10 +13,20 @@
     </header>
     
     <div class = "box">
+        <div class="box"><h3 class="header">Visualization</h3></div>
+        
+            <div class = "filter-controls">
+                <button id="accident-only" class="filter-button" type="button">Accidents Without Impound</button>
+                <button id="both-accidents" class="filter-button" type="button">All Accidents</button>
+                <button id="clear-markers" class="filter-button" type="button">Clear Markers</button>
+            </div>
+       
         <div class="container">
-            <div id="mapContainer">
-                <h3 class="header">Visualization</h3>
-                <div id="map"></div>
+           
+            <div class="box">
+                <div id="mapContainer">
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -24,6 +34,6 @@
        
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
