@@ -1,75 +1,85 @@
-const URL = "https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json";
-let map;
-let markerClusterGroup;
-
 function initMap() {
-  map = L.map("map").setView([38.8329, -76.8746], 11);
-  L.tileLayer("https://tile.openstreetmap.org/%7Bz%7D/%7Bx%7D/%7By%7D.png", {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright%22%3EOpenStreetMap</a>',
+  console.log('initMap');
+  const map = L.map('map').setView([38.9897, -76.9378], 13);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+  return map;
 }
 
-async function fetchData(filterType) {
-  try {
-    const response = await fetch(URL);
-    const data = await response.json();
-
-    let accidents;
-
-    if (filterType === "both") {
-      accidents = data.filter(
-        item =>
-          item.clearance_code_inc_type === "ACCIDENT" ||
-          item.clearance_code_inc_type === "ACCIDENT WITH IMPOUND"
-      );
-    } else {
-      accidents = data.filter(item => item.clearance_code_inc_type === "ACCIDENT");
-    }
-
-    addMarkersToMap(accidents);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
-}
-
-function addMarkersToMap(accidents) {
-  if (markerClusterGroup) {
-    map.removeLayer(markerClusterGroup);
-  }
-
-  const markers = [];
-
-  accidents.forEach(accident => {
-    const { latitude, longitude, street_address } = accident;
-    const circle = L.circle([latitude, longitude], {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5,
-      radius: 500
-    }).addTo(map);
-    circle.bindPopup(street_address);
-    markers.push(circle);
-  });
-
-  markerClusterGroup = L.markerClusterGroup();
-  markerClusterGroup.addLayers(markers);
-  map.addLayer(markerClusterGroup);
-}
-
-function clearMarkers() {
+function markerPlace(array, map) {
   map.eachLayer((layer) => {
-    if (layer instanceof L.Marker) {
+    if (layer instanceof L.CircleMarker) {
       layer.remove();
     }
   });
+
+  array.forEach((item, index) => {
+    const combined = [item.location.longitude, item.location.latitude];
+    const circleMarker = L.circleMarker([combined[1], combined[0]], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: 20
+    });
+    circleMarker.addTo(map);
+    if (index === 0) {
+      map.setView([combined[1], combined[0]], 10);
+    }
+  });
+}
+
+async function getData(typeofaccident) {
+  let json = JSON.parse(localStorage.getItem('accidentData'));
+  if (!json) {
+    const url = 'https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json';
+    const request = await fetch(url);
+    json = await request.json();
+    localStorage.setItem('accidentData', JSON.stringify(json));
+  }
+
+  if (typeofaccident.includes("|")) {
+    console.log("Contains |");
+    const split = typeofaccident.split("|");
+    const reply2 = json.filter((item) => item.clearance_code_inc_type === split[0]);
+    const reply3 = json.filter((item) => item.clearance_code_inc_type === split[1]);
+    return reply2.concat(reply3);
+  }
+  const reply = json.filter((item) => item.clearance_code_inc_type === typeofaccident);
+  return reply;
+}
+
+async function refreshData() {
+  const url = 'https://data.princegeorgescountymd.gov/resource/wb4e-w4nf.json';
+  const request = await fetch(url);
+  const json = await request.json();
+  localStorage.setItem('accidentData', JSON.stringify(json));
 }
 
 async function mainEvent() {
-  initMap();
+  const pageMap = initMap();
+  const dropdown = document.getElementById('dropdown');
+  const submits = document.querySelector('#button');
+  const refreshButton = document.getElementById('refresh');
 
-  document.getElementById("accident-only").addEventListener("click", () => fetchData("accident"));
-  document.getElementById("both-accidents").addEventListener("click", () => fetchData("both"));
-  document.getElementById("clear-markers").addEventListener("click", clearMarkers);
+  console.log(submits);
+
+  submits.addEventListener('click', async (submitEvent) => {
+    submitEvent.preventDefault();
+    const values = dropdown.value.toUpperCase();
+    const jsonData = await getData(values);
+    markerPlace(jsonData, pageMap);
+  });
+
+  refreshButton.addEventListener('click', async () => {
+    await refreshData();
+    console.log('refreshing data')
+    const values = dropdown.value.toUpperCase();
+    const jsonData = await getData(values);
+    markerPlace(jsonData, pageMap);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", async () => mainEvent());
+document.addEventListener('DOMContentLoaded', async () => mainEvent());
+
