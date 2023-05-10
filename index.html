@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accident Prevention in Prince George's County</title>
-   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 
 </head>
@@ -22,11 +22,18 @@
           <div>Here is the story that I am telling. It is a good story. Hopefully, 
             as I type more, the box will adjust its size.
           </div>
+
         </div>
 
         <div class="right_section box">
           <h3>How Does the Dataset Work</h3>
           <div>Here are the ways it works</div>
+          <div class="box_chart">
+            <button id="loadChart">Load Chart</button>
+            <div class="chart_container">
+              <canvas id="incidentChart"></canvas>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -37,3 +44,5 @@
     <script src="./script.js"></script>
   </body>
 </html>
+
+

@@ -122,7 +122,18 @@
     height:fit-content;
     
   }
+  .box_chart{
+    display: flexbox;
+    border: 2px outset black;
+    border-radius: 4px;
+    width: fit-content;
+    height:fit-content;
+    padding: 1.5rem;
+    margin: 0 auto;
+    color: #fff;
+    background-color: #fff;
 
+  }
   .box {
     display: flexbox;
     border: 2px outset black;
