@@ -19,21 +19,27 @@
       <div class="container">
         <div class="left_section box">
           <h3>Description of the Issue and Compelling Story:</h3>
-          <div>Here is the story that I am telling. It is a good story. Hopefully, 
-            as I type more, the box will adjust its size.
+          <div>Speeding is a major issue that significantly contributes to the frequency and severity of road accidents. It reduces the driver's ability to steer properly around curves or objects in the road, and it extends the distance necessary to stop a vehicle. Furthermore, the higher the speed, the greater the risk of serious injury or death in a crash. This issue is particularly pressing in Prince George's County. 
+
+            Speed cameras can play a crucial role in mitigating this issue. These devices, installed along roadsides, use radar technology to measure a vehicle's speed. If the vehicle is traveling over the speed limit, the camera captures an image of the license plate for later enforcement. Speed cameras serve as a reminder for drivers to check their speed, knowing that violations will be detected and penalized. Studies have shown that speed cameras can significantly reduce traffic accidents and speeding. 
+            
+            For me, this issue has a deeply personal significance. My family experienced four car accidents within a span of two months in Prince George's County. Two of these accidents nearly claimed the lives of my loved ones, and both were the result of the other drivers' excessive speed. The reality of these experiences highlights the need for better traffic regulations, such as speed cameras, to enforce speed limits and improve road safety. I hope that displaying this data graphically and showing just how much of an issue it is locally, we can get better solutions implemented quickly. 
+            
           </div>
 
         </div>
 
         <div class="right_section box">
           <h3>How Does the Dataset Work</h3>
-          <div>Here are the ways it works</div>
+          <div>The data contained in this website is pulled from the Prince George’s County police report data. While the dataset has many aspects to it, I have filtered it down to just two different types of accidents. The first type of accident (called ‘Accident’) means that police had to be called to the scene, but the cars could still be removed from the scene without a tow truck. The other type of accident is called ‘Accident with Impound’. This type of accident means the cars were seriously destroyed and could not be removed from the scene without a tow truck. By clicking the button below, you can see the breakdown of the types of accidents. Keep in mind that the number of accidents displayed here are all from one month in the year 2017. As a result, the seriousness of the issue is underplayed as there is so much data that the webpage could not fit it. </div>
           <div class="box_chart">
             <button id="loadChart">Load Chart</button>
             <div class="chart_container">
               <canvas id="incidentChart"></canvas>
             </div>
           </div>
+          <div>On the second page, you will be able to filter between the two accident types by choosing an option from the dropdown menu and hitting the submit button. By zooming in, you will be able to see an overlap between accidents. Accidents within 3000 feet of one another are considered to be a problem area. These problem areas are where better traffic regulations (such as speeding cameras) would be needed.</div>
+          <div> Click the link in the footer of the page to view the second page.</div>
         </div>
 
       </div>
